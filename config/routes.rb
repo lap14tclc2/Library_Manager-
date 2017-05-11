@@ -1,0 +1,87 @@
+Rails.application.routes.draw do
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get    'login'   => 'sessions#new'
+
+  post   'login'   => 'sessions#create'
+  
+  delete 'logout'  => 'sessions#destroy'
+  
+  get 'sessions/new'
+
+  get 'users/new'
+
+  get 'signup'  => 'users#new'
+
+  get 'users/index'
+  
+  get 'publishers/new'
+
+  get 'publishers/create'
+
+  get 'publishers/update'
+
+  get 'publishers/edit'
+
+  get 'publishers/destroy'
+
+  get 'publishers/index'
+
+  get 'publishers/show'
+
+  get 'authors/new'
+
+  get 'authors/create'
+
+  get 'authors/update'
+
+  get 'authors/edit'
+
+  get 'authors/destroy'
+
+  get 'authors/index'
+
+  get 'authors/show'
+
+  get 'categories/new'
+
+  get 'categories/create'
+
+  get 'categories/update'
+
+  get 'categories/edit'
+
+  get 'categories/destroy'
+
+  get 'categories/index'
+
+  get 'categories/show'
+
+  get 'books/new'
+
+  get 'books/create'
+
+  get 'books/update'
+
+  get 'books/edit'
+
+  get 'books/destroy'
+
+  get 'books/index'
+
+  get 'books/show'
+
+  get 'about/index'
+
+  root 'books#index'
+
+ 
+  resources :books do
+    resources :reviews
+  end
+  
+  resources :authors
+  resources :categories
+  resources :publishers
+  resources :users
+
+end

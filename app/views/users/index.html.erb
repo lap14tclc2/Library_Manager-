@@ -1,0 +1,38 @@
+<!-- <div id="users_path">
+  <% @users.each do |user| %>
+    <div class="row">
+        <div class = "col-md-3 col-sm-3">
+        <%= gravatar_for user %>
+        <h3><%= user.name %></h3>
+        </div>
+    </div>
+  <% end %>
+</div> -->
+<h1>All Users</h1>
+
+
+<%= will_paginate %>
+
+
+<div id="users_path">
+
+<table class="table table-striped">
+
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= gravatar_for user %></td>
+        <td><%= link_to user.name, user, class: 'text-center' %></td>
+        <td><h4><%= user.email %></h4></td>
+        <td><% if current_user.admin? && !current_user?(user) %>
+               <%= link_to "delete user", user, method: :delete,
+                                data: { confirm: "Are you sure?" } %></td>
+        <% end %>
+
+      </tr>
+      
+    <% end %>
+  </table>
+
+
+
+<%= will_paginate %>

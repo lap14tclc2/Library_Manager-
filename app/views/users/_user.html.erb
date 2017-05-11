@@ -1,0 +1,21 @@
++<h1>
++  <%= gravatar_for @user %>
++  <%= @user.name %>
++</h1>
++
++<h3>
++  <%= @user.email %>
++</h3>
++
++
++  <% @users.each_slice 4 do |user| %>
++    <div class="row">
++      <% user.each do |user| %>
++        <div class = "col-md-3 col-sm-3">
++        <%= gravatar_for user %>
++        <h3><%=link_to user.name, user %></h3>
++        </div>
++      <% end %>
++    </div>
++  <% end %>
++</div>

@@ -1,0 +1,80 @@
+<div class="books_show">
+
+  <div><h2><%= @book.title %></h2></div>
+
+    <div class="books_show_left">
+      <%= image_tag @book.coverpath %>
+         
+   <div class="row">
+       
+      <div class="links btn-group">
+
+        <h2>Reviews</h2>
+        <%= render @book.reviews %>
+
+        <div>
+           <%= link_to "Add Review", new_book_review_path(@book), class: "btn btn-custom" %>
+        </div> 
+
+        <%= link_to "Back", root_path, class: "btn btn-custom" %>
+      </div>
+
+   </div>
+    
+    </div>
+
+    <div class="books_show_right">
+
+      <h3>Book Info:</h3>
+
+      <ul>
+        
+        <li><strong>Category:</strong> <%= @book.category.name %></li>
+        <li><strong>Author:</strong> <%= @book.author.first_name %> <%= @book.author.last_name %></li>
+        <li><strong>Publisher:</strong> <%= @book.publisher.name %></li>
+        <li><strong>Pages:</strong> <%= @book.pages %></li>
+
+        <li>
+         <p class="avg-rating"><strong>Average Rating</strong></p>
+         <div class="average-review-rating" data-score= <%= @average_review %> ></div>
+         <span class="number-of-reviews"><strong>This book had <%= @book.reviews.count %> reviews</strong></span> 
+        </li>
+      </ul>
+     
+    </div>
+
+ </div>
+     
+   <div class="links btn-group">
+
+        
+
+      <% if current_user && current_user.admin? %>
+          <h3>Admin Controls</h3>
+          <%= link_to 'Edit', edit_book_path(@book.id), class: "btn btn-custom" %> |
+          <%= link_to 'Delete', book_path(@book), method: :delete,
+                                                  data: {confirm: 'Are you sure?'}, class: "btn btn-custom" %>
+        <% end %> 
+   </div>
+
+
+
+<script>
+    $('.review-rating').raty({
+        readOnly: true,
+        score: function() {
+            return $(this).attr('data-score');
+        },
+        path: '/assets/'
+    });
+</script>
+
+<script>
+    $('.average-review-rating').raty({
+        readOnly: true,
+        path: '/assets/',
+        score: function() {
+            return $(this).attr('data-score')
+        }
+    });
+</script>
